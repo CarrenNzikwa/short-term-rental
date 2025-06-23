@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Villa Ruko</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="Logo">Villa Ruko</div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html"></a>Home</li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#amenities">Amenities</a></li>
+          <li><a href="#location">Locations</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!--Hero section-->
+    <section class="hero">
+      <div class="overlay">
+        <h1>Villa Ruko</h1>
+        <p>
+          Experience luxuryliving in our exquisite 4-bedroom villa nestled in
+          the heart of paradise
+        </p>
+        <div class="info-icons">
+          <span>🛏️4 bedrooms</span>
+          <span>👥Up to 8 guests</span>
+          <span>📐350 m²</span>
+          <span>⭐4.9/5 (128 reviews)</span>
+        </div>
+        <a href="#Book" class="book-btn">Book Now</a>
+      </div>
+    </section>
+
+    <section id="Book" class="booking-section">
+      <form id="booking-form">
+        <h2>Book Your Stay</h2>
+
+        <!-- Row 1: Full Name and Phone Number -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" required />
+          </div>
+        </div>
+
+        <!-- Row 2: Email -->
+        <div class="form-row single">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" required />
+          </div>
+        </div>
+
+        <!-- Row 3: Check-in and Check-out -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="checkin">Check-in Date</label>
+            <input type="date" id="checkin" required />
+          </div>
+          <div class="form-group">
+            <label for="checkout">Check-out Date</label>
+            <input type="date" id="checkout" required />
+          </div>
+        </div>
+
+        <!-- Row 4: Adults and Children -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="adults">Adults</label>
+            <input type="number" id="adults" value="1" min="1" required />
+          </div>
+          <div class="form-group">
+            <label for="children">Children</label>
+            <input type="number" id="children" value="0" min="0" />
+          </div>
+        </div>
+
+        <label for="requests">Special Requests</label>
+        <textarea
+          id="requests"
+          placeholder="Let us know any special requests..."
+        ></textarea>
+
+        <div class="terms">
+          <input type="checkbox" id="agree" required />
+          <label for="agree">
+            I agree to the
+            <a href="#">terms and conditions</a> and
+            <a href="#">cancellation policy</a>.
+          </label>
+        </div>
+      </form>
+
+      <aside class="price-summary">
+        <h3>Price Summary</h3>
+        <p><strong>Ksh 8,000</strong> per night</p>
+        <p id="night-count">0 nights</p>
+        <p id="total">Total: Ksh 0</p>
+
+        <button class="reserve-btn">Reserve Now</button>
+        <button onclick="checkBookingAvailability()">Reserve Now</button>
+
+        <p class="note">You won't be charged yet</p>
+      </aside>
+    </section>
+
+    <section>
+      <div class="calendar-container">
+        <h2>Check Availability</h2>
+        <div class="calendar-header">
+          <button id="prevMonth">‹</button>
+          <span id="monthYearDisplay"></span>
+          <button id="nextMonth">›</button>
+        </div>
+        <div id="calendarGrid" class="calendar-grid"></div>
+        <div class="calendar-legend">
+          <span class="legend available">Available</span>
+          <span class="legend booked">Booked</span>
+          <span class="legend selected">Selected</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+      <h2>Gallery</h2>
+      <div class="gallery-grid">
+        <!-- Image -->
+        <div class="gallery-item">
+          <img
+            src="images/sky beach.jpg"
+            alt="Villa 1"
+            onclick="openLightbox(0)"
+          />
+        </div>
+        <!-- Video -->
+        <div class="gallery-item">
+          <video src="videos/" controls muted onclick="openLightbox(1)"></video>
+        </div>
+        <!-- Add more items -->
+        <div class="gallery-item">
+          <img
+            src="images/carribean.jpg"
+            alt="Villa 2"
+            onclick="openLightbox(2)"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+      <span class="close" onclick="closeLightbox()">&times;</span>
+      <span class="prev" onclick="changeSlide(-1)">❮</span>
+      <div class="lightbox-content" id="lightbox-content"></div>
+      <span class="next" onclick="changeSlide(1)">❯</span>
+    </div>
+
+    <section class="villa-overview">
+      <h2>Villa Overview</h2>
+      <p class="description">
+        Nestled in serene surroundings, Villa Ruko offers an unforgettable stay
+        with luxurious amenities and peaceful privacy. Enjoy modern comforts
+        with tropical charm.
+      </p>
+
+      <div class="features">
+        <div class="feature-item">
+          <i class="fa fa-wifi"></i>
+          <span>Wi-Fi</span>
+        </div>
+        <div class="feature-item">
+          <i class="fa fa-swimming-pool"></i>
+          <span>Pool</span>
+        </div>
+        <div class="feature-item">
+          <i class="fa fa-car"></i>
+          <span>Parking</span>
+        </div>
+        <div class="feature-item">
+          <i class="fa fa-shield-alt"></i>
+          <span>24x7 Security</span>
+        </div>
+      </div>
+
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.990233537281!2d40.017131!3d-3.3525289999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x181581db91639cd1%3A0xe358bf2346deb498!2sVilla%20Ruko%20watamu!5e0!3m2!1sen!2ske!4v1750507185150!5m2!1sen!2ske"
+          width="100%"
+          height="350"
+          style="border: 0"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </section>
+
+    <section id="reviews" class="reviews-section">
+      <div class="reviews-left">
+        <h2>What Guests Are Saying</h2>
+        <div class="review-card">
+          <p>
+            “Amazing stay! The villa was spotless and the staff were super
+            friendly.”
+          </p>
+          <div class="review-stars">★★★★★</div>
+          <span class="reviewer-name">— Sarah W.</span>
+        </div>
+        <div class="review-card">
+          <p>“A peaceful retreat with beautiful views. Highly recommended.”</p>
+          <div class="review-stars">★★★★☆</div>
+          <span class="reviewer-name">— James K.</span>
+        </div>
+        <!-- Add more static review cards for now -->
+        <div class="review-buttons">
+          <button class="read-reviews">Read All Reviews</button>
+          <button class="leave-review">Leave a Google Review</button>
+        </div>
+      </div>
+
+      <div class="reviews-right">
+        <h3>Overall Rating</h3>
+        <div class="overall-score">4.9 ★</div>
+        <ul class="rating-breakdown">
+          <li><span>Cleanliness</span><span>5.0</span></li>
+          <li><span>Accuracy</span><span>4.8</span></li>
+          <li><span>Communication</span><span>4.9</span></li>
+          <li><span>Location</span><span>5.0</span></li>
+          <li><span>Value</span><span>4.7</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="detailed-info-section">
+      <h2>Detailed Information</h2>
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="amenities">Amenities</button>
+        <button class="tab-btn" data-tab="house-rules">House Rules</button>
+        <button class="tab-btn" data-tab="location">
+          Location & Transport
+        </button>
+        <button class="tab-btn" data-tab="cancellation">
+          Cancellation Policy
+        </button>
+      </div>
+
+      <div class="tab-content">
+        <div class="tab-pane active" id="amenities">
+          <ul class="amenities-grid">
+            <li><img src="icons/wifi.svg" alt="WI-FI" />Free Wi-Fi</li>
+            <li>
+              <img src="icons/ac.svg" alt="Air Conditioning" /> Air Conditioning
+            </li>
+            <li>
+              <img src="icons/pool.svg" alt="Private Pool" /> Private Pool
+            </li>
+            <li>
+              <img src="icons/kitchen.svg" alt="Kitchen" /> Fully-equipped
+              Kitchen
+            </li>
+            <li>
+              <img src="icons/tv.svg" alt="Smart TV" /> Smart TV with Netflix
+            </li>
+            <li>
+              <img src="icons/parking.svg" alt="Parking" /> Secure Parking
+            </li>
+            <li><img src="icons/pet.svg" alt="Pet Friendly" /> Pet Friendly</li>
+            <li>
+              <img src="icons/coffee.svg" alt="Coffee Machine" /> Coffee Machine
+            </li>
+            <li>
+              <img src="icons/washing-machine.svg" alt="Laundry" /> Washing
+              Machine
+            </li>
+            <li>
+              <img src="icons/iron.svg" alt="Iron" /> Iron & Ironing Board
+            </li>
+            <li><img src="icons/hairdryer.svg" alt="Hairdryer" /> Hairdryer</li>
+            <li>
+              <img src="icons/first-aid.svg" alt="First Aid" /> First Aid Kit
+            </li>
+          </ul>
+        </div>
+        <div class="tab-pane" id="house-rules">
+          <ul>
+            <h2>Check-in & Check-out</h2>
+            <li>Check-in:2:00 PM-8:00 PM</li>
+            <li>Check-out 11:00 AM</li>
+            <li>
+              Early check-in and late check-out may be available upon
+              request(additional fees may apply)
+            </li>
+
+            <h2>General Rules</h2>
+            <li>No smoking inside</li>
+            <li>No pets allowed</li>
+            <li>Quiet hours from 10pm</li>
+            <li>Check-in: 2pm — Check-out: 11am</li>
+            <li>No parties or events without prior approval</li>
+
+            <h2>Safety & Security</h2>
+            <li>Smoke detectors and fire extinguishers are installed</li>
+            <li>First aid kit available</li>
+            <li>Lock all doors and windows when leaving the villa</li>
+          </ul>
+        </div>
+        <div class="tab-pane" id="location">
+          <p>
+            Located in Watamu, 3-minute walk to the beach.The neighbourhood
+            offers a perfect balance of tranquility and convinience, with easy
+            access to popular attractions, restaurants and shopping areas.
+          </p>
+          <h2>Nearby Attractions</h2>
+          <li>Snake Farm</li>
+          <h2>Restaurants & Cafes</h2>
+          <li>7VIZI cafe(Amici Miei)- (5min walk)</li>
+          <h2>Transportation</h2>
+          <p>Getting Around</p>
+          <li>Airport transfers available(Getting around)</li>
+          <li>Taxi service can be arranged</li>
+          <li>Private driver service(additional fee)</li>
+        </div>
+        <div class="tab-pane" id="cancellation">
+          <h2>Cancellation Policy</h2>
+          <p>
+            We understand that plans can change.To provide flexibility while
+            ensuring we can accommodate all our guests, we have the following
+            cancellation policy:
+          </p>
+          <li>
+            <strong>Free cancellation within 48 hours of booking.</strong>
+          </li>
+          <p>Full refund of all payments made</p>
+
+          <li>50% refund if cancelled 7 days before check-in.</li>
+          <li>No refund for cancellations within 48 hours of check-in.</li>
+
+          <h2>Special Circumstances</h2>
+          <li><strong>Media Emergencies</strong></li>
+          <p>
+            With proper documentation, we may offer more flexible cancellation
+            terms
+          </p>
+
+          <li><strong>Travel Modifications</strong></li>
+          <p>
+            If official travel restrictions prevent your stay, we'll work with
+            you to reschedule or provide a credit for future stay
+          </p>
+
+          <h2>Booking Modifications</h2>
+          <p>
+            Changes to your reservation dates are subject to availability and
+            may incur rate differences. Please contact us at least 14 days
+            before your scheduled arrival to request any modifications.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+      <div class="contact-container">
+        <!-- LEFT SIDE: CONTACT DETAILS -->
+        <div class="contact-left">
+          <h2>Contact Us</h2>
+          <h3>Get In Touch</h3>
+          <p>
+            Have a question about Villa Ruko or need assistance with your
+            booking? Our team is here to help you plan the perfect stay.
+          </p>
+
+          <div class="contact-info">
+            <div class="info-block">
+              <div class="icon">📞</div>
+              <div>
+                <h4>Customer Support</h4>
+                <p>Available 24x7 for any inquiries.</p>
+                <a href="tel:+254707650526">+254 707 650 526</a>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <div class="icon">✉️</div>
+              <div>
+                <h4>Email Us</h4>
+                <p>We respond within 24 hours.</p>
+                <a href="mailto:villaruko85@gmail.com">villaruko85@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="info-block">
+              <div class="icon">💬</div>
+              <div>
+                <h4>WhatsApp</h4>
+                <p>Quick responses via messaging.</p>
+                <a href="https://wa.me/254707650526" target="_blank"
+                  >Start Chat</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE: CONTACT FORM -->
+        <div class="contact-right">
+          <h3>Send a Message</h3>
+          <form class="contact-form" id="message-form">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" required />
+
+            <label for="email">Email</label>
+            <input type="email" id="email" required />
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" />
+
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" required />
+
+            <label for="message">Message</label>
+            <textarea id="message" rows="4" required></textarea>
+
+            <div class="terms">
+              <input type="checkbox" id="agree" required />
+              <label for="agree">
+                I agree to the <a href="#">privacy policy</a> and consent to
+                being contacted regarding my inquiry.
+              </label>
+            </div>
+
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <!-- Column 1: Logo + About -->
+        <div class="footer-col">
+          <h2 class="footer-logo">Villa Wani</h2>
+          <p>
+            Luxury, comfort, and tranquility await you in the heart of Watamu.
+            Your unforgettable Watamu experience starts here.
+          </p>
+        </div>
+
+        <!-- Column 2: Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#booking">Book Now</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Contact Info -->
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <p><i class="fas fa-map-marker-alt"></i>Aquarius Beach Road,Watamu</p>
+          <p><i class="fas fa-phone-alt"></i>+254 707 650 526</p>
+          <p><i class="fas fa-envelope"></i> Villaruko85@gmail.com</p>
+        </div>
+
+        <!-- Column 4: Social Media -->
+        <div class="footer-col">
+          <h4>Follow Us</h4>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2025 Villa Wani. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <!-- Link CSS and JS -->
+    <script src="script.js"></script>
+  </body>
+</html>
