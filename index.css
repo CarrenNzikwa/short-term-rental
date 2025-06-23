@@ -46,7 +46,7 @@ body {
 /* Hero Section */
 .hero {
   height: 100vh;
-  background: url("images/sky\ beach.jpg") no-repeat center center/cover;
+  background: url("sky\ beach.jpg") no-repeat center center/cover;
   position: relative;
   display: flex;
   align-items: center;
